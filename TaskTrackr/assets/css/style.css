@@ -1,0 +1,648 @@
+/* General Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1531;
+    margin: 0;
+    padding: 0;
+    display: flex; 
+    flex-direction: column; 
+    min-height: 100vh; 
+}
+
+/* Wrapper for Sidebar, Header, and Main Content */
+.wrapper {
+    display: flex;
+    flex: 1;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    height: 100vp;
+    min-height: calc(100vh - 60px);
+    width: 240px;
+    min-width: 240px;
+    z-index: 1030;
+    transition: width 0.35s cubic-bezier(.4,2,.6,1), box-shadow 0.3s cubic-bezier(.4,2,.6,1), background 0.2s;
+    background-color: #0a061e;
+    color: #0a061e;
+    padding: 0 0 20px 0; 
+    overflow: hidden;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.08);
+    border-right: 1px solid #23272b;
+    will-change: width;
+}
+.sidebar.collapsed {
+    width: 60px;
+    min-width: 60px;
+    box-shadow: 1px 0 6px #0a061e;
+}
+.sidebar .sidebar-text {
+    transition: opacity 0.25s cubic-bezier(.4,2,.6,1), width 0.25s cubic-bezier(.4,2,.6,1);
+    white-space: nowrap;
+}
+.sidebar .nav-link[href="/TaskTrackr/public/dashboard.php"] .sidebar-text,
+.sidebar .nav-link[href="/TaskTrackr/public/tasks.php"] .sidebar-text,
+.sidebar .nav-link[href="/TaskTrackr/public/projects.php"] .sidebar-text,
+.sidebar .nav-link[href="/TaskTrackr/public/groups.php"] .sidebar-text,
+.sidebar .nav-link[href="/TaskTrackr/public/settings.php"] .sidebar-text {
+    color: #ffffff; 
+}
+/* Add hover effect for these specific links */
+.sidebar .nav-link[href="/TaskTrackr/public/dashboard.php"]:hover .sidebar-text,
+.sidebar .nav-link[href="/TaskTrackr/public/tasks.php"]:hover .sidebar-text,
+.sidebar .nav-link[href="/TaskTrackr/public/projects.php"]:hover .sidebar-text,
+.sidebar .nav-link[href="/TaskTrackr/public/groups.php"]:hover .sidebar-text,
+.sidebar .nav-link[href="/TaskTrackr/public/settings.php"]:hover .sidebar-text {
+    color: #0a061e 
+}
+.sidebar.collapsed .sidebar-text {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: background 0.2s, color 0.2s, padding 0.35s cubic-bezier(.4,2,.6,1);
+}
+
+.sidebar.collapsed .nav-link {
+    justify-content: center;
+    padding: 10px 0;
+    transition: background 0.2s, color 0.2s, padding 0.35s cubic-bezier(.4,2,.6,1);
+}
+
+.sidebar .nav-link i {
+    font-size: 1.5rem;
+    min-width: 32px;
+    text-align: center;
+    display: inline-block;
+    transition: font-size 0.3s;
+}
+.sidebar .nav-link[href="/TaskTrackr/public/dashboard.php"] i,
+.sidebar .nav-link[href="/TaskTrackr/public/tasks.php"] i,
+.sidebar .nav-link[href="/TaskTrackr/public/projects.php"] i,
+.sidebar .nav-link[href="/TaskTrackr/public/groups.php"] i,
+.sidebar .nav-link[href="/TaskTrackr/public/settings.php"] i {
+    color: #ffffff; 
+}
+.sidebar .nav-link[href="/TaskTrackr/public/dashboard.php"]:hover i,
+.sidebar .nav-link[href="/TaskTrackr/public/tasks.php"]:hover i,
+.sidebar .nav-link[href="/TaskTrackr/public/projects.php"]:hover i,
+.sidebar .nav-link[href="/TaskTrackr/public/groups.php"]:hover i,
+.sidebar .nav-link[href="/TaskTrackr/public/settings.php"]:hover i {
+    color: #0a061e; 
+}
+.sidebar.collapsed .nav-link i {
+    margin-right: 0;
+}
+
+.sidebar .nav-link.bg-primary {
+    background-color: #ffd88d !important;
+    color: #0a061e !important;
+}
+
+.sidebar .nav-link:hover, .sidebar .nav-link:focus {
+    background-color: #ffd88d;
+    color: #0a061e;
+}
+
+.sidebar .nav-link.text-danger {
+    color: #dc3545 !important;
+}
+
+.sidebar .nav-link.text-danger:hover {
+    background-color: #dc3545;
+    color: #fff0f0 !important;
+}
+
+.sidebar .nav-item.mt-auto {
+    margin-top: auto;
+}
+
+/* Sidebar Toggle Button - Fixed Top-Right Inside Sidebar */
+.sidebar-toggle-btn {
+    position: fixed;
+    top: 65px; 
+    left: 240px; 
+    z-index: 1100;
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    background: #0a061e;
+    color: #fff;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: left 0.35s cubic-bezier(.4,2,.6,1), background 0.2s;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+.sidebar.collapsed ~ .sidebar-toggle-btn,
+.sidebar.collapsed .sidebar-toggle-btn {
+    left: 60px;
+}
+@media (max-width: 991.98px) {
+    .sidebar-toggle-btn {
+        display: none;
+    }
+}
+
+/* Header Styling */
+header {
+    display: block;
+    color: #ffffff; 
+    background-color: #0a061e; 
+    padding: 10px;
+    text-align: center; 
+    z-index: 1000; 
+    position: relative; 
+}
+
+header .navbar-brand {
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #27223e;
+}
+
+header .btn-light {
+    border: none;
+    background-color: #27223e;
+}
+
+header .btn-light:hover, header .btn-light:focus {
+    background-color: #ffd88d;
+}
+
+header .dropdown-menu {
+    min-width: 200px;
+}
+
+/* Main Content Styling */
+.main-content {
+    margin-left: 240px;
+    transition: margin-left 0.3s;
+}
+body.sidebar-collapsed .main-content {
+    margin-left: 60px;
+}
+
+.sidebar.collapsed ~ .main-content,
+body .sidebar.collapsed + .main-content {
+    margin-left: 60px;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #0a061e;
+    border-top: 1px solid #0a061e;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    margin-left: 0;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* Custom Footer Styling */
+.bg-dark-custom {
+    background-color: #0a061e; 
+    color: #0a061e; 
+}
+
+.bg-dark-custom p {
+    color: #ffffff; 
+}
+
+.bg-dark-custom a {
+    color: #0a061e; 
+    text-decoration: none; 
+    transition: color 0.3s ease; 
+}
+
+.bg-dark-custom a:hover {
+    color: #ffd88d; 
+}
+
+/* Card Styling */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Dashboard Box Styling */
+.card {
+    background-color: #27223e; 
+    color: #ffffff; 
+    border: none; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    padding: 20px; 
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
+}
+
+/*Add hover effect */
+.card:hover {
+    background-color: #27223e; 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
+}
+
+.card p {
+    color: #ffffff !important; 
+    font-size: 1rem; 
+    line-height: 1.5; 
+    margin: 0; 
+}
+
+.card {
+    
+    color: #ffffff; 
+}
+
+.card .text-muted {
+    color: #ffffff !important; 
+}
+
+/* Task List Card Styling */
+.card {
+    background-color: #27223e; 
+    color: #ffffff; 
+    border: none; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+/* Card Header Styling */
+.card-header {
+    background-color: #3a3450; 
+    color: #ffffff; 
+    font-weight: bold; 
+    border-bottom: 1px solid #424242; 
+}
+
+/* Task List Items with Borders */
+.list-group-item {
+    background-color: #27223e; 
+    color: #ffffff; 
+    border: 1px solid #3a3450; 
+    border-radius: 5px; 
+    padding: 15px; 
+    margin-bottom: 10px; 
+    transition: background-color 0.3s ease; 
+}
+
+/* Hover Effect for List Items */
+.list-group-item:hover {
+    background-color: #3a3450; 
+    color: #ffffff; 
+    border-color: #ffd88d;
+}
+
+/* Task Actions Buttons */
+.btn-primary {
+    background-color: #0d6efd; 
+    border-color: #0d6efd;
+    color: #ffffff; 
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3; 
+}
+
+.btn-warning {
+    background-color: #ffc107; 
+    border-color: #ffc107; 
+    color: #27223e; 
+}
+
+.btn-warning:hover {
+    background-color: #e0a800; 
+    border-color: #e0a800; 
+}
+
+/* Form Styling */
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Alerts Styling */
+.alert {
+    margin-top: 20px; 
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Center the register container */
+.container {
+    background-color: #0a061e !important; 
+    color: #ffffff; 
+    padding: 20px; 
+    border-radius: 10px; 
+}
+
+/* Profile Name Styling */
+#profileDropdown .fw-semibold {
+    color: #ffffff; 
+    transition: color 0.3s ease; 
+}
+
+#profileDropdown:hover .fw-semibold {
+    color: #ffd88d; 
+}
+
+/* Profile Dropdown Button */
+#profileDropdown {
+    background-color: transparent; 
+    color: #ffffff; 
+    border: none; 
+    transition: color 0.3s ease, background-color 0.3s ease; 
+}
+
+#profileDropdown:hover {
+    color: #ffd88d; 
+    background-color: rgba(255, 255, 255, 0.1); 
+}
+
+/* Notification Button Styling */
+.btn-light[aria-label="Notifications"] {
+    background-color: transparent; 
+    color: #ffffff; 
+    border: none; 
+    transition: color 0.3s ease, background-color 0.3s ease; 
+}
+
+.btn-light[aria-label="Notifications"]:hover {
+    color: #ffd88d; 
+    background-color: rgba(255, 255, 255, 0.1); 
+}
+
+/* Notification Badge Styling */
+.btn-light[aria-label="Notifications"] .badge {
+    background-color: #ff0000; 
+    color: #ffffff; 
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    header {
+        left: 0;
+        width: 100%;
+    }
+
+    .main-content {
+        margin-left: 0;
+        margin-top: 60px;
+    }
+
+    footer {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    body {
+        padding-top: 60px;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 991.98px) {
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 60px;
+        width: 240px;
+        min-width: 240px;
+        height: calc(100vh - 60px);
+        transform: translateX(-100%);
+        transition: transform 0.3s;
+        z-index: 1050;
+    }
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    .sidebar.collapsed {
+        width: 60px;
+        min-width: 60px;
+    }
+    #sidebarCollapse {
+        display: none;
+    }
+    .sidebar-backdrop {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100vw;
+        height: calc(100vh - 60px);
+        background: rgba(0,0,0,0.3);
+        z-index: 1049;
+    }
+    .sidebar-backdrop.show {
+        display: block;
+    }
+    .main-content {
+        margin-left: 0 !important;
+    }
+}
+
+/* Add a spacer after the fixed header */
+body > header + .d-flex,
+body > header + div.d-flex {
+    margin-top: 60px;
+}
+
+/* FullCalendar Styling */
+#calendar {
+    background-color: #0a061e; 
+    color: #ffffff; 
+    border-radius: 10px; 
+    padding: 10px; 
+    height: 600px; 
+    overflow: hidden; 
+}
+
+
+.fc {
+    height: 100%; 
+}
+
+/* Calendar Header Styling */
+.fc-toolbar {
+    position: sticky; 
+    top: 0;
+    z-index: 10; 
+    background-color: #27223e; 
+    color: #ffffff; 
+    border-bottom: 1px solid #ffffff; 
+    padding: 10px;
+}
+
+/* Calendar Day Numbers */
+.fc-daygrid-day-number {
+    color: #ffffff !important; 
+    font-weight: bold; 
+}
+
+/* Calendar Day Cells */
+.fc-daygrid-day {
+    background-color: #27223e; 
+    color: #ffffff; 
+    border: 1px solid #424242; 
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.fc-daygrid-day:hover {
+    background-color: #3a3450; 
+    color: #ffffff; 
+}
+
+/* Highlight Today */
+.fc-day-today {
+    background-color: #0d6efd; 
+    color: #ffffff; 
+    font-weight: bold;
+}
+
+/* Calendar Events */
+.fc-event {
+    background-color: #ffd88d; 
+    color: #0a061e; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 5px;
+}
+
+.fc-event:hover {
+    background-color: #ffcc80; 
+    color: #0a061e;
+}
+
+/* Calendar Weekday Headers */
+.fc-col-header-cell {
+    background-color: #3a3450; 
+    color: #ffffff !important; 
+    font-weight: bold; 
+    text-align: center; 
+    padding: 10px; 
+    border: 1px solid #424242; 
+}
+
+/* Calendar Weekday Header Text */
+.fc-col-header-cell-cushion {
+    color: #ffffff !important; 
+    font-weight: bold; 
+    text-align: center; 
+}
+
+/* Table Styling */
+.table {
+    background-color: #27223e; 
+    color: #ffffff; 
+    border-collapse: separate; 
+    border-spacing: 0 10px; 
+}
+
+.table th {
+    background-color: #3a3450; 
+    color: #ffffff; 
+    font-weight: bold; 
+    text-align: center; 
+    border: none; 
+}
+
+.table td {
+    background-color: #27223e; 
+    color: #ffffff; 
+    border: none; 
+    text-align: center;
+    vertical-align: middle; 
+}
+
+.table-hover tbody tr:hover {
+    background-color: #3a3450; 
+    color: #ffffff; 
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #2e2a45; 
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+    background-color: #27223e; 
+}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const calendarEl = document.getElementById('calendar');
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: <?= json_encode($events); ?>,
+            headerToolbar: {
+                left: 'prev,next today', // Keep only "Previous," "Next," and "Today" buttons
+                center: 'title', // Keep the calendar title in the center
+                right: '' // Remove "Month," "Week," and "Day" buttons
+            }
+        });
+        calendar.render();
+    });
+</script>
